@@ -1,0 +1,672 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://172.20.10.2:3000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [28/Jan/2026 19:03:31] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:31] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:32] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:32] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:56] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:56] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:57] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:03:57] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:22] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:22] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:23] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:23] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:51] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:51] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:52] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:04:52] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:13] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:13] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:14] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:14] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:42] "OPTIONS /companies/3 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:43] "PATCH /companies/3 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:43] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:43] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:44] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:05:44] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:05] "OPTIONS /companies/8 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:06] "[31m[1mDELETE /companies/8 HTTP/1.1[0m" 400 -
+127.0.0.1 - - [28/Jan/2026 19:06:08] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:08] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:08] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:08] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:09] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:09] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:19] "OPTIONS /users/8 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:20] "PATCH /users/8 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:20] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:20] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:21] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:21] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:23] "OPTIONS /companies/8 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:06:25] "[31m[1mDELETE /companies/8 HTTP/1.1[0m" 400 -
+127.0.0.1 - - [28/Jan/2026 19:09:36] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:37] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:41] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:41] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:42] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:42] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:45] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:46] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:47] "OPTIONS /imports/sheets?filename=CPS参展商客户名单-分配表1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:48] "GET /imports/sheets?filename=CPS参展商客户名单-分配表1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:55] "OPTIONS /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:56] "POST /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:56] "OPTIONS /imports/sheets?filename=20260128_190956_CPS-1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:09:57] "GET /imports/sheets?filename=20260128_190956_CPS-1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:11:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:11:46] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:11:46] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:11:46] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:26] "OPTIONS /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:27] "POST /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:27] "OPTIONS /imports/sheets?filename=20260128_191427_CPS-1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:27] "GET /imports/sheets?filename=20260128_191427_CPS-1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:29] "OPTIONS /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:29] "[31m[1mPOST /imports/opportunities HTTP/1.1[0m" 400 -
+127.0.0.1 - - [28/Jan/2026 19:14:34] "[31m[1mPOST /imports/opportunities HTTP/1.1[0m" 400 -
+127.0.0.1 - - [28/Jan/2026 19:14:39] "OPTIONS /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:14:39] "[31m[1mPOST /imports/opportunities HTTP/1.1[0m" 400 -
+127.0.0.1 - - [28/Jan/2026 19:15:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:15:46] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:15:46] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:15:46] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:23:11] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:23:11] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:23:12] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:23:12] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:31:50] "OPTIONS /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:34:27] "POST /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:34:27] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:34:28] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:54:04] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:54:04] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:54:04] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 19:54:05] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:03] "OPTIONS /imports/sheets?filename=CPS参展商客户名单-分配表1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:03] "GET /imports/sheets?filename=CPS参展商客户名单-分配表1219.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:09] "OPTIONS /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:09] "POST /imports/upload HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:09] "OPTIONS /imports/sheets?filename=20260128_200009_202512-27CCMT2026_.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:11] "GET /imports/sheets?filename=20260128_200009_202512-27CCMT2026_.xlsx HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:00:28] "OPTIONS /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:11:39] "POST /imports/opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:11:39] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:11:40] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:41] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:42] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 20:43:43] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:29] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:29] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:30] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:30] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:58] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:58] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:58:59] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:59:00] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:59:32] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:59:32] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:59:33] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 21:59:34] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:13] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:14] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:14] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:15] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:50] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:50] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:51] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:00:52] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:33:25] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:33:26] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:33:27] "OPTIONS /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:33:28] "GET /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:35:46] "OPTIONS /opportunities/1485/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:35:47] "GET /opportunities/1485/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:35:50] "GET /opportunities/1485/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:35:51] "OPTIONS /opportunities/1485/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:36:10] "POST /opportunities/1485/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:36:36] "OPTIONS /opportunities/1483/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:36:37] "GET /opportunities/1483/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:36:59] "POST /opportunities/1483/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:38:37] "OPTIONS /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:38:37] "GET /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:07] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:09] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:18] "OPTIONS /opportunities/393/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:19] "GET /opportunities/393/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:35] "OPTIONS /opportunities/386/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:53:36] "GET /opportunities/386/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:55:02] "OPTIONS /opportunities/170/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 22:55:03] "GET /opportunities/170/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:32:48] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:32:49] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:32] "OPTIONS /opportunities/1288/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:33] "GET /opportunities/1288/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:33:59] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:01] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:02] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:08] "OPTIONS /opportunities/1484/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:08] "GET /opportunities/1484/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:53] "OPTIONS /opportunities/1484/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:34:54] "GET /opportunities/1484/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:02] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:02] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:05] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:06] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:09] "OPTIONS /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:10] "GET /opportunities/1485/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:19] "OPTIONS /opportunities/1484/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:20] "GET /opportunities/1484/analysis HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:30] "OPTIONS /opportunities/1483/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:30] "GET /opportunities/1483/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:46] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:47] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:47] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:47] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:47] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:47] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:48] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:48] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:49] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:49] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:35:50] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:36:00] "OPTIONS /opportunities/1447/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:36:00] "GET /opportunities/1447/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:37:47] "OPTIONS /opportunities/1478/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:37:47] "GET /opportunities/1478/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:37:57] "OPTIONS /opportunities/1437/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:37:58] "GET /opportunities/1437/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:38:21] "OPTIONS /opportunities/1426/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:38:21] "GET /opportunities/1426/contacts HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:39:19] "OPTIONS /opportunities/1426 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:39:20] "PATCH /opportunities/1426 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:39:20] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:39:21] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:40:00] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:40:01] "GET /opportunities?type=host HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:40:03] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:40:04] "GET /opportunities?type=normal HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:44:53] "OPTIONS /opportunities/339/activities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:44:54] "GET /opportunities/339/activities HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:45:03] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:45:03] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:45:04] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:45:04] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:47:37] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:47:37,180] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:37] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:47:55] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:47:55,149] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:55] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:47:56,510] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:56] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:47:57,157] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:57] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:47:57,340] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:57] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:47:57,540] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:47:57] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:49:21] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:49:21,949] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:49:21] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:49:22,724] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:49:22] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:51:04] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:51:04,023] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 763, in login
+    return None
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 644, in get_db
+    "contact_department": opportunity.get("contact_department"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [28/Jan/2026 23:51:04] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:51:51] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:51:54,595] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:51:54] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:51:58] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:51:59] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:00] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:00] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:00] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:00] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:01] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:52:02] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:52:02,929] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:52:02] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:52:16] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:52:18,316] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:52:18] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:53:32] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:53:32,786] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:53:32] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:56:44] "OPTIONS /login HTTP/1.1" 200 -
+[2026-01-28 23:56:45,263] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:56:45] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+[2026-01-28 23:56:47,176] ERROR in app: Exception on /login [POST]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 793, in login
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 153, in execute
+    result = self._query(query)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/cursors.py", line 322, in _query
+    conn.query(q)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 563, in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 825, in _read_query_result
+    result.read()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1199, in read
+    first_packet = self.connection._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 775, in _read_packet
+    packet.raise_for_error()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/protocol.py", line 219, in raise_for_error
+    err.raise_mysql_exception(self._data)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
+    raise errorclass(errno, errval)
+pymysql.err.OperationalError: (1054, "Unknown column 'password_hash' in 'field list'")
+127.0.0.1 - - [28/Jan/2026 23:56:47] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+127.0.0.1 - - [28/Jan/2026 23:59:42] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [28/Jan/2026 23:59:43] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:01:01] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:01:02] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:02:41] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:02:42] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:03:31] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:03:31] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:06:51] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:06:52] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:07:32] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:33] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+127.0.0.1 - - [29/Jan/2026 00:07:51] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [29/Jan/2026 00:07:52] "OPTIONS /users HTTP/1.1" 200 -
