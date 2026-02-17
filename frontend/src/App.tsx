@@ -367,6 +367,9 @@ type OpportunitySummary = {
   in_progress: number;
   ready_for_handoff: number;
   host: number;
+  follow_ups: number;
+  contacts: number;
+  personas: number;
 };
 
 type OrgTreeNode = {
@@ -389,7 +392,10 @@ function App() {
     valid: 0,
     in_progress: 0,
     ready_for_handoff: 0,
-    host: 0
+    host: 0,
+    follow_ups: 0,
+    contacts: 0,
+    personas: 0
   });
   const [opportunityPagination, setOpportunityPagination] = useState<TablePaginationConfig>({
     current: 1,
@@ -540,14 +546,20 @@ function App() {
         valid: 0,
         in_progress: 0,
         ready_for_handoff: 0,
-        host: 0
+        host: 0,
+        follow_ups: 0,
+        contacts: 0,
+        personas: 0
       };
       setOpportunitySummary({
-        total: summaryData.total ?? 0,
-        valid: summaryData.valid ?? 0,
-        in_progress: summaryData.in_progress ?? 0,
-        ready_for_handoff: summaryData.ready_for_handoff ?? 0,
-        host: summaryData.host ?? 0
+        total: toNumber(summaryData.total) ?? 0,
+        valid: toNumber(summaryData.valid) ?? 0,
+        in_progress: toNumber(summaryData.in_progress) ?? 0,
+        ready_for_handoff: toNumber(summaryData.ready_for_handoff) ?? 0,
+        host: toNumber(summaryData.host) ?? 0,
+        follow_ups: toNumber(summaryData.follow_ups) ?? 0,
+        contacts: toNumber(summaryData.contacts) ?? 0,
+        personas: toNumber(summaryData.personas) ?? 0
       });
       setOpportunityPagination({
         current: body.page ?? currentPage,
@@ -2234,8 +2246,6 @@ function App() {
   const tableTitle = activeView === "opportunities" ? "商机列表" : `${breadcrumbLabel}列表`;
   const summaryTypeLabel = activeView === "normal" ? "普通商机" : "主场商机";
   const summaryTypeValue = activeView === "opportunities" ? summary.host : summary.total;
-  const headerTitle = activeView === "org" ? "组织架构管理" : "商机管理工作台";
-  const headerSubtitle = activeView === "org" ? "公司与员工权限" : "";
   const userInitial = currentUser?.name ? currentUser.name.slice(0, 1) : "U";
   const analysis = analysisData?.analysis || {};
   const analysisContacts = safeArray(analysisData?.contacts ?? analysis?.contacts);
@@ -2414,6 +2424,16 @@ function App() {
         />
       </Sider>
       <Layout>
+        <Header className="app-header">
+          <div className="user-bar">
+            <Dropdown menu={{ items: userMenuItems }} trigger={["click"]} placement="bottomRight">
+              <Avatar className="user-avatar" size="large">
+                {userInitial}
+              </Avatar>
+            </Dropdown>
+          </div>
+        </Header>
+
         <Content className="app-content">
           <>
           {activeView === "org" ? (
@@ -2545,6 +2565,21 @@ function App() {
                       <Statistic title={summaryTypeLabel} value={summaryTypeValue} />
                     </Card>
                   </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Card>
+                      <Statistic title="跟进记录" value={summary.follow_ups} />
+                    </Card>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Card>
+                      <Statistic title="客户画像" value={summary.personas} />
+                    </Card>
+                  </Col>
+                  <Col xs={24} sm={12} md={6}>
+                    <Card>
+                      <Statistic title="联系人" value={summary.contacts} />
+                    </Card>
+                  </Col>
                 </Row>
               )}
 
@@ -2606,12 +2641,11 @@ function App() {
                                   .toLowerCase()
                                   .includes(input.toLowerCase())
                               }
+                              options={users.map((user) => ({
+                                value: user.id,
+                                label: user.name
+                              }))}
                             >
-                              {users.map((user) => (
-                                <Option key={user.id} value={user.id}>
-                                  {user.name}
-                                </Option>
-                              ))}
                             </Select>
                           </Form.Item>
                         </Col>

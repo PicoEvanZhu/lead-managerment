@@ -5,176 +5,593 @@
  * Running on http://127.0.0.1:3000
  * Running on http://172.20.10.2:3000
 [33mPress CTRL+C to quit[0m
-127.0.0.1 - - [29/Jan/2026 21:53:01] "GET /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "GET /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:36] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:37] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:37] "GET /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:40] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:40] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:41] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:41] "GET /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:43] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:43] "GET /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:47] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:53:48] "GET /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:43] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:44] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:44] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:44] "GET /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:45] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:45] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:55:45] "GET /opportunities HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:56:10] "OPTIONS /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:56:11] "GET /opportunities?type=normal HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:56:13] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:56:14] "GET /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:57:15] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:57:15] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:57:16] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:57:16] "GET /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:33] "OPTIONS /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:33] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:33] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:34] "GET /opportunities?type=host HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:59] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:58:59] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:00] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:01] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:26] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:26] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:27] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:27] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:59] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 21:59:59] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:00:00] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:00:01] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:35] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:36] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:41] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:41] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:41] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:02:42] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:08] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:09] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:10] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:10] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:11] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:11] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:12] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:04:12] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:41:11] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:41:11] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:54:20] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:54:20] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:54:21] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 22:54:21] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:02:31] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:02:31] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:02:32] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:02:32] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:04:52] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:04:52] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:04:52] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:04:53] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:09:25] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:09:25] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:09:25] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:09:25] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:10] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:10] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:11] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:11] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:51] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:52] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:56] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:12:56] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:16:06] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:16:06] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:16:07] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:16:07] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:17:43] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:17:43] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:17:44] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:17:44] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:22:08] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:22:08] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:22:09] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:22:09] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:41:59] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:00] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:14] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:14] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:14] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:14] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:15] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:16] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:18] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:42:19] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:44:14] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:44:14] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:44:14] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:44:14] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "OPTIONS /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:25] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "OPTIONS /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:26] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:28] "GET /users HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:28] "GET /companies HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:29] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:49:30] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:51:35] "OPTIONS /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:51:35] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:51:35] "GET /me HTTP/1.1" 200 -
-127.0.0.1 - - [29/Jan/2026 23:51:35] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:11:08] "GET /opportunities HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:13:41] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:13:41] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:13:42] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:13:44] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:30:24] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:30:55] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:35:07] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:35:07] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:35:07] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 00:35:09] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:55] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:56] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:56] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:56] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:56] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 02:39:56] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:13] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:14] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:14] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:25] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:26] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:27] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:27] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:28] "OPTIONS /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:29] "GET /opportunities?type=normal&page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:29] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:30] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:31] "OPTIONS /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:10:32] "GET /opportunities?type=host&page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:19] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:19] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:19] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:20] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:20] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:20] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:20] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 09:35:20] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:50] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:51] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:52] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:53] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:09:53] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:04] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:05] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:07] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:07] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:09] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:15] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:15] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:15] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:23:15] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:50] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:51] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 13:32:51] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 20:31:06] "OPTIONS /companies HTTP/1.1" 200 -
+[2026-01-30 20:31:06,859] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -
+[2026-01-30 20:31:06,862] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+[2026-01-30 20:31:06,897] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-30 20:31:06,947] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -
+[2026-01-30 20:31:06,947] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-30 20:31:06,947] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [30/Jan/2026 20:31:06] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:27] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:28] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:28] "OPTIONS /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:28] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:29] "GET /me HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:29] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:30] "GET /users HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:30] "GET /companies HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2026 21:31:31] "GET /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 01:21:46] "OPTIONS /companies HTTP/1.1" 200 -
+[2026-01-31 01:21:51,992] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:21:51] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-31 01:21:51,993] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:21:51] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+[2026-01-31 01:21:51,993] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:21:52] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -
+[2026-01-31 01:37:50,716] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:37:50] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -
+[2026-01-31 01:37:50,720] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:37:50] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-31 01:37:50,721] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 01:37:50] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /companies HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /me HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /opportunities?page=1&page_size=10 HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jan/2026 09:27:27] "OPTIONS /companies HTTP/1.1" 200 -
+[2026-01-31 09:27:27,743] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-31 09:27:27,743] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -
+[2026-01-31 09:27:27,744] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+[2026-01-31 09:27:27,788] ERROR in app: Exception on /me [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /me HTTP/1.1[0m" 500 -
+[2026-01-31 09:27:27,813] ERROR in app: Exception on /companies [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /companies HTTP/1.1[0m" 500 -
+[2026-01-31 09:27:27,813] ERROR in app: Exception on /opportunities [GET]
+Traceback (most recent call last):
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 783, in wrapper
+  File "/Users/zhutianyu/Documents/code/lead managerment/backend/app.py", line 712, in get_db
+    "updated_at": row.get("updated_at"),
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 361, in __init__
+    self.connect()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 668, in connect
+    self._get_server_information()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 1098, in _get_server_information
+    packet = self._read_packet()
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 744, in _read_packet
+    packet_header = self._read_bytes(4)
+  File "/Users/zhutianyu/Documents/code/lead managerment/.venv/lib/python3.9/site-packages/pymysql/connections.py", line 798, in _read_bytes
+    raise err.OperationalError(
+pymysql.err.OperationalError: (2013, 'Lost connection to MySQL server during query')
+127.0.0.1 - - [31/Jan/2026 09:27:27] "[35m[1mGET /opportunities?page=1&page_size=10 HTTP/1.1[0m" 500 -

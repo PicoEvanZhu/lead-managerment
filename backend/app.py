@@ -72,6 +72,13 @@ def hash_password(password: str) -> str:
   # Use pbkdf2 to avoid hashlib.scrypt dependency in older Python builds.
   return generate_password_hash(password, method="pbkdf2:sha256")
 
+
+def _to_int(value):
+  try:
+    return int(value or 0)
+  except (TypeError, ValueError):
+    return 0
+
 ANALYSIS_SCHEMA = (
   "{\n"
   '  "organizer_profile": {\n'
@@ -1355,6 +1362,24 @@ def list_opportunities():
       params
     )
     summary_row = cur.fetchone() or {}
+    cur.execute(
+      f"SELECT COUNT(*) AS follow_up_count FROM activities "
+      f"WHERE opportunity_id IN (SELECT id FROM opportunities {where_clause})",
+      params
+    )
+    follow_up_row = cur.fetchone() or {}
+    cur.execute(
+      f"SELECT COUNT(*) AS contact_count FROM opportunity_contacts "
+      f"WHERE opportunity_id IN (SELECT id FROM opportunities {where_clause})",
+      params
+    )
+    contact_row = cur.fetchone() or {}
+    cur.execute(
+      f"SELECT COUNT(*) AS persona_count FROM opportunity_insights "
+      f"WHERE opportunity_id IN (SELECT id FROM opportunities {where_clause})",
+      params
+    )
+    persona_row = cur.fetchone() or {}
     total = summary_row.get("total", 0)
     cur.execute(
       f"SELECT * FROM opportunities {where_clause} ORDER BY updated_at DESC LIMIT %s OFFSET %s",
@@ -1363,17 +1388,20 @@ def list_opportunities():
     rows = cur.fetchall()
 
   summary = {
-    "total": total,
-    "valid": summary_row.get("valid_count", 0) or 0,
-    "in_progress": summary_row.get("in_progress_count", 0) or 0,
-    "ready_for_handoff": summary_row.get("ready_for_handoff_count", 0) or 0,
-    "host": summary_row.get("host_count", 0) or 0
+    "total": _to_int(total),
+    "valid": _to_int(summary_row.get("valid_count", 0)),
+    "in_progress": _to_int(summary_row.get("in_progress_count", 0)),
+    "ready_for_handoff": _to_int(summary_row.get("ready_for_handoff_count", 0)),
+    "host": _to_int(summary_row.get("host_count", 0)),
+    "follow_ups": _to_int(follow_up_row.get("follow_up_count", 0)),
+    "contacts": _to_int(contact_row.get("contact_count", 0)),
+    "personas": _to_int(persona_row.get("persona_count", 0))
   }
 
   return jsonify(
     {
       "data": rows,
-      "total": total,
+      "total": _to_int(total),
       "page": page,
       "page_size": limit,
       "summary": summary
