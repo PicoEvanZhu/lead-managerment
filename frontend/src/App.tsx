@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type Key } from "react";
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState, type Key } from "react";
 import moment from "moment";
 import {
   Layout,
@@ -24,10 +24,12 @@ import {
   Descriptions,
   List,
   Divider,
+  Badge,
   Modal,
   message,
   Typography,
-  Tooltip
+  Tooltip,
+  Tabs
 } from "antd";
 import {
   PlusOutlined,
@@ -55,11 +57,17 @@ import {
   LinkOutlined,
   ClearOutlined,
   IdcardOutlined,
-  UploadOutlined
+  UploadOutlined,
+  BellOutlined
 } from "@ant-design/icons";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import type { MenuProps } from "antd";
 import "./App.css";
+import WorkflowErrorBoundary from "./WorkflowErrorBoundary";
+import MessageCenterDrawer from "./MessageCenterDrawer";
+import useMessageCenter, { type HeaderMessageItem } from "./useMessageCenter";
+
+const WorkflowCenter = lazy(() => import("./WorkflowCenter"));
 
 const { Header, Sider, Content } = Layout;
 const { Option } = Select;
@@ -148,7 +156,11 @@ const STAGE_LABELS: Record<string, string> = {
   ready_for_handoff: "待移交"
 };
 
-const API_BASE = (import.meta.env.VITE_API_BASE || "http://localhost:3000").replace(/\/$/, "");
+const DEFAULT_API_BASE =
+  typeof window !== "undefined"
+    ? `${window.location.protocol}//${window.location.hostname}:3000`
+    : "http://127.0.0.1:3000";
+const API_BASE = (import.meta.env.VITE_API_BASE || DEFAULT_API_BASE).replace(/\/$/, "");
 
 const USER_STORAGE_KEY = "crm_user_id";
 
@@ -171,7 +183,7 @@ const AiCuteIcon = () => (
   </svg>
 );
 
-type ActiveView = "org" | "opportunities" | "normal" | "host";
+type ActiveView = "org" | "opportunities" | "normal" | "host" | "workflow";
 type OverviewType = "all" | "normal" | "host";
 
 type Opportunity = {
@@ -218,6 +230,34 @@ type Opportunity = {
   company_id?: number | null;
 };
 
+type HostPoolEvent = {
+  id: number;
+  source_site?: string | null;
+  external_id?: string | null;
+  name: string;
+  alias_name?: string | null;
+  industry?: string | null;
+  country?: string | null;
+  city?: string | null;
+  organizer_name?: string | null;
+  venue_name?: string | null;
+  venue_address?: string | null;
+  exhibition_start_date?: string | null;
+  exhibition_end_date?: string | null;
+  cycle_text?: string | null;
+  exhibition_area_sqm?: number | null;
+  exhibitors_count?: number | null;
+  visitors_count?: number | null;
+  heat_score?: number | null;
+  source_url?: string | null;
+  source_cover_url?: string | null;
+  source_list_url?: string | null;
+  is_domestic?: number | null;
+  pool_status?: string | null;
+  converted_opportunity_id?: number | null;
+  updated_at?: string | null;
+};
+
 type CurrentUser = {
   id: number;
   name: string;
@@ -259,6 +299,26 @@ type User = {
   company_id?: number | null;
   status?: string | null;
   created_at?: string | null;
+  org_role_ids?: number[];
+  org_role_names?: string[];
+  org_position_ids?: number[];
+  org_position_names?: string[];
+};
+
+type OrgDimension = {
+  id: number;
+  name: string;
+  code?: string | null;
+  company_id?: number | null;
+  company_name?: string | null;
+  status?: string | null;
+  created_at?: string | null;
+  updated_at?: string | null;
+};
+
+type WorkflowFocusRequest = {
+  instanceId: number;
+  token: number;
 };
 
 type OpportunityContact = {
@@ -280,6 +340,13 @@ type FilterValues = {
   owner_id?: number;
   company_id?: number;
   source?: string;
+};
+
+type HostPoolFilterValues = {
+  keyword?: string;
+  city?: string;
+  industry?: string;
+  pool_status?: string;
 };
 
 type CreateFormValues = {
@@ -347,6 +414,15 @@ type UserFormValues = {
   company_id?: number;
   status?: string;
   password?: string;
+  org_role_ids?: number[];
+  org_position_ids?: number[];
+};
+
+type OrgDimensionFormValues = {
+  name: string;
+  code?: string;
+  company_id?: number;
+  status?: string;
 };
 
 type LoginFormValues = {
@@ -406,14 +482,25 @@ function App() {
   const [overviewType, setOverviewType] = useState<OverviewType>("all");
   const [companies, setCompanies] = useState<Company[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [orgRoles, setOrgRoles] = useState<OrgDimension[]>([]);
+  const [orgPositions, setOrgPositions] = useState<OrgDimension[]>([]);
   const [companyLoading, setCompanyLoading] = useState(false);
   const [userLoading, setUserLoading] = useState(false);
+  const [orgRoleLoading, setOrgRoleLoading] = useState(false);
+  const [orgPositionLoading, setOrgPositionLoading] = useState(false);
   const [companyDrawerOpen, setCompanyDrawerOpen] = useState(false);
   const [userDrawerOpen, setUserDrawerOpen] = useState(false);
+  const [orgRoleDrawerOpen, setOrgRoleDrawerOpen] = useState(false);
+  const [orgPositionDrawerOpen, setOrgPositionDrawerOpen] = useState(false);
   const [companyEditing, setCompanyEditing] = useState<Company | null>(null);
   const [userEditing, setUserEditing] = useState<User | null>(null);
+  const [orgRoleEditing, setOrgRoleEditing] = useState<OrgDimension | null>(null);
+  const [orgPositionEditing, setOrgPositionEditing] = useState<OrgDimension | null>(null);
   const [companySaving, setCompanySaving] = useState(false);
   const [userSaving, setUserSaving] = useState(false);
+  const [orgRoleSaving, setOrgRoleSaving] = useState(false);
+  const [orgPositionSaving, setOrgPositionSaving] = useState(false);
+  const [orgManageTab, setOrgManageTab] = useState<"users" | "roles" | "positions">("users");
   const [userDetailOpen, setUserDetailOpen] = useState(false);
   const [userDetail, setUserDetail] = useState<User | null>(null);
   const [createOpen, setCreateOpen] = useState(false);
@@ -439,11 +526,25 @@ function App() {
   const [importSheets, setImportSheets] = useState<string[]>([]);
   const [uploadLoading, setUploadLoading] = useState(false);
   const [uploadedFilename, setUploadedFilename] = useState<string | null>(null);
+  const [workflowFocusRequest, setWorkflowFocusRequest] = useState<WorkflowFocusRequest | null>(null);
+  const [hostOpportunityTab, setHostOpportunityTab] = useState<"host_list" | "host_pool">("host_list");
+  const [hostPoolEvents, setHostPoolEvents] = useState<HostPoolEvent[]>([]);
+  const [hostPoolLoading, setHostPoolLoading] = useState(false);
+  const [hostPoolSyncing, setHostPoolSyncing] = useState(false);
+  const [hostPoolConvertingId, setHostPoolConvertingId] = useState<number | null>(null);
+  const [hostPoolPagination, setHostPoolPagination] = useState<TablePaginationConfig>({
+    current: 1,
+    pageSize: 10,
+    total: 0
+  });
 
   const [filterForm] = Form.useForm<FilterValues>();
+  const [hostPoolFilterForm] = Form.useForm<HostPoolFilterValues>();
   const [createForm] = Form.useForm<CreateFormValues>();
   const [companyForm] = Form.useForm<CompanyFormValues>();
   const [userForm] = Form.useForm<UserFormValues>();
+  const [orgRoleForm] = Form.useForm<OrgDimensionFormValues>();
+  const [orgPositionForm] = Form.useForm<OrgDimensionFormValues>();
   const [userFilterForm] = Form.useForm<UserFilterValues>();
   const [loginForm] = Form.useForm<LoginFormValues>();
   const [importForm] = Form.useForm<{
@@ -462,7 +563,7 @@ function App() {
   const isSubAdmin = currentUser?.role === "subsidiary_admin";
   const canManageOrg = Boolean(isGroupAdmin || isSubAdmin);
 
-  const headers = (): HeadersInit => {
+  const headers = useCallback((): HeadersInit => {
     if (!userId) {
       throw new Error("请先设置用户 ID。");
     }
@@ -470,19 +571,55 @@ function App() {
       "Content-Type": "application/json",
       "x-user-id": String(userId)
     };
-  };
+  }, [userId]);
 
-  const uploadHeaders = (): HeadersInit => {
+  const uploadHeaders = useCallback((): HeadersInit => {
     if (!userId) {
       throw new Error("请先设置用户 ID。");
     }
     return {
       "x-user-id": String(userId)
     };
-  };
+  }, [userId]);
 
-  const apiFetch = (path: string, options: RequestInit = {}) =>
-    fetch(`${API_BASE}${path}`, options);
+  const apiFetch = useCallback(
+    (path: string, options: RequestInit = {}) => fetch(`${API_BASE}${path}`, options),
+    []
+  );
+  const handleMessageCenterError = useCallback((errorText: string) => {
+    message.error(errorText);
+  }, []);
+  const {
+    messageCenterOpen,
+    messageCenterLoading,
+    messageScope,
+    messageScopeOptions,
+    filteredMessageItems,
+    readMessageIdSet,
+    messageUnreadCount,
+    messageItemsCount,
+    setMessageScope,
+    openMessageCenter,
+    closeMessageCenter,
+    refreshMessages,
+    markMessageRead,
+    markAllMessagesRead,
+    resetMessageCenter
+  } = useMessageCenter({
+    userId,
+    hasCurrentUser: Boolean(currentUser),
+    isWorkflowActive: activeView === "workflow",
+    apiFetch,
+    headers,
+    onError: handleMessageCenterError
+  });
+
+  const toNumber = (value: any) => {
+    if (value === null || value === undefined || value === "") return undefined;
+    if (typeof value === "number" && !Number.isNaN(value)) return value;
+    const parsed = parseInt(String(value), 10);
+    return Number.isNaN(parsed) ? undefined : parsed;
+  };
 
   const fetchCurrentUser = async () => {
     setAuthChecking(true);
@@ -574,6 +711,103 @@ function App() {
     }
   };
 
+  const fetchHostPoolEvents = async (
+    override: Partial<HostPoolFilterValues> = {},
+    pagination?: { page?: number; pageSize?: number }
+  ) => {
+    setHostPoolLoading(true);
+    try {
+      const values = hostPoolFilterForm.getFieldsValue();
+      const payload: Record<string, string | number | undefined | null> = {
+        ...values,
+        ...override
+      };
+      const params = new URLSearchParams();
+      Object.entries(payload).forEach(([key, value]) => {
+        if (value === undefined || value === null || value === "") {
+          return;
+        }
+        params.append(key, String(value));
+      });
+      const currentPage = pagination?.page ?? hostPoolPagination.current ?? 1;
+      const currentPageSize = pagination?.pageSize ?? hostPoolPagination.pageSize ?? 10;
+      params.set("page", String(currentPage));
+      params.set("page_size", String(currentPageSize));
+
+      const response = await apiFetch(`/host-pool/events?${params.toString()}`, {
+        headers: headers()
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "加载失败");
+      }
+      setHostPoolEvents(body.data || []);
+      setHostPoolPagination({
+        current: body.page ?? currentPage,
+        pageSize: body.page_size ?? currentPageSize,
+        total: body.total ?? 0
+      });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "加载失败";
+      message.error(errorMessage);
+    } finally {
+      setHostPoolLoading(false);
+    }
+  };
+
+  const syncHostPoolEvents = async () => {
+    setHostPoolSyncing(true);
+    try {
+      const response = await apiFetch("/host-pool/events/sync", {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({
+          source: "qufair",
+          max_categories: 12,
+          max_events_per_category: 80,
+          fetch_detail: true
+        })
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "同步失败");
+      }
+      const result = body.data || {};
+      message.success(
+        `同步完成：新增 ${result.inserted || 0}，更新 ${result.updated || 0}，跳过 ${result.skipped || 0}`
+      );
+      fetchHostPoolEvents();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "同步失败";
+      message.error(errorMessage);
+    } finally {
+      setHostPoolSyncing(false);
+    }
+  };
+
+  const convertHostPoolEvent = async (record: HostPoolEvent) => {
+    setHostPoolConvertingId(record.id);
+    try {
+      const response = await apiFetch(`/host-pool/events/${record.id}/convert`, {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify({})
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "转商机失败");
+      }
+      const alreadyExists = Boolean(body.data?.already_exists);
+      message.success(alreadyExists ? "已存在同名主场商机，已自动关联。" : "已转为主场商机。");
+      await Promise.all([fetchHostPoolEvents(), fetchOpportunities()]);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "转商机失败";
+      message.error(errorMessage);
+    } finally {
+      setHostPoolConvertingId(null);
+    }
+  };
+
   const fetchActivities = async (opportunityId: number) => {
     setActivityLoading(true);
     try {
@@ -630,7 +864,7 @@ function App() {
     }
   };
 
-  const fetchCompanies = async () => {
+  const fetchCompanies = useCallback(async () => {
     setCompanyLoading(true);
     try {
       const response = await apiFetch("/companies", { headers: headers() });
@@ -645,9 +879,9 @@ function App() {
     } finally {
       setCompanyLoading(false);
     }
-  };
+  }, [apiFetch, headers]);
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     setUserLoading(true);
     try {
       const response = await apiFetch("/users", { headers: headers() });
@@ -662,11 +896,45 @@ function App() {
     } finally {
       setUserLoading(false);
     }
-  };
+  }, [apiFetch, headers]);
 
-  const refreshOrg = async () => {
-    await Promise.all([fetchCompanies(), fetchUsers()]);
-  };
+  const fetchOrgRoles = useCallback(async () => {
+    setOrgRoleLoading(true);
+    try {
+      const response = await apiFetch("/org/roles", { headers: headers() });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "加载失败");
+      }
+      setOrgRoles(body.data || []);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "加载失败";
+      message.error(errorMessage);
+    } finally {
+      setOrgRoleLoading(false);
+    }
+  }, [apiFetch, headers]);
+
+  const fetchOrgPositions = useCallback(async () => {
+    setOrgPositionLoading(true);
+    try {
+      const response = await apiFetch("/org/positions", { headers: headers() });
+      const body = await response.json();
+      if (!response.ok) {
+        throw new Error(body.error || "加载失败");
+      }
+      setOrgPositions(body.data || []);
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "加载失败";
+      message.error(errorMessage);
+    } finally {
+      setOrgPositionLoading(false);
+    }
+  }, [apiFetch, headers]);
+
+  const refreshOrg = useCallback(async () => {
+    await Promise.all([fetchCompanies(), fetchUsers(), fetchOrgRoles(), fetchOrgPositions()]);
+  }, [fetchCompanies, fetchUsers, fetchOrgRoles, fetchOrgPositions]);
 
   useEffect(() => {
     if (userId) {
@@ -680,11 +948,20 @@ function App() {
     if (userId) {
       if (activeView === "org") {
         refreshOrg();
+      } else if (activeView === "workflow") {
+        // Workflow center loads data on demand.
+        return;
       } else {
         fetchOpportunities();
       }
     }
   }, [userId, activeView, overviewType]);
+
+  useEffect(() => {
+    if (userId && activeView === "host" && hostOpportunityTab === "host_pool") {
+      fetchHostPoolEvents();
+    }
+  }, [userId, activeView, hostOpportunityTab]);
 
   useEffect(() => {
     if (userId && companies.length === 0) {
@@ -697,6 +974,18 @@ function App() {
       fetchUsers();
     }
   }, [userId, canManageOrg, users.length]);
+
+  useEffect(() => {
+    if (userId && canManageOrg && orgRoles.length === 0) {
+      fetchOrgRoles();
+    }
+  }, [userId, canManageOrg, orgRoles.length, fetchOrgRoles]);
+
+  useEffect(() => {
+    if (userId && canManageOrg && orgPositions.length === 0) {
+      fetchOrgPositions();
+    }
+  }, [userId, canManageOrg, orgPositions.length, fetchOrgPositions]);
 
   useEffect(() => {
     if (activeView === "org" && currentUser && !canManageOrg) {
@@ -718,6 +1007,21 @@ function App() {
 
   const summary = opportunitySummary;
 
+  const handleWorkflowFocusHandled = useCallback(() => {
+    setWorkflowFocusRequest(null);
+  }, []);
+
+  const handleMessageItemClick = (item: HeaderMessageItem) => {
+    markMessageRead(item.id);
+    closeMessageCenter();
+    setWorkflowFocusRequest({
+      instanceId: item.instance_id,
+      token: Date.now()
+    });
+    setActiveView("workflow");
+    message.info(`已打开审批详情 #${item.instance_id}`);
+  };
+
   const handleOpportunityTableChange = (pagination: TablePaginationConfig) => {
     const nextPage = pagination.current ?? 1;
     const nextPageSize = pagination.pageSize ?? opportunityPagination.pageSize ?? 10;
@@ -737,6 +1041,50 @@ function App() {
     [companies]
   );
   const userMap = useMemo(() => new Map(users.map((user) => [user.id, user.name])), [users]);
+  const workflowCompanies = useMemo(
+    () => companies.map((company) => ({ id: company.id, name: company.name })),
+    [companies]
+  );
+  const workflowUsers = useMemo(
+    () =>
+      users.map((user) => ({
+        id: user.id,
+        name: user.name,
+        role: user.role,
+        company_id: user.company_id
+      })),
+    [users]
+  );
+  const activeOrgRoles = useMemo(
+    () => orgRoles.filter((item) => (item.status || "active") === "active"),
+    [orgRoles]
+  );
+  const activeOrgPositions = useMemo(
+    () => orgPositions.filter((item) => (item.status || "active") === "active"),
+    [orgPositions]
+  );
+  const workflowRoleOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          activeOrgRoles
+            .map((item) => String(item.name || "").trim())
+            .filter(Boolean)
+        )
+      ),
+    [activeOrgRoles]
+  );
+  const workflowPositionOptions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          activeOrgPositions
+            .map((item) => String(item.name || "").trim())
+            .filter(Boolean)
+        )
+      ),
+    [activeOrgPositions]
+  );
 
   const companyChildrenMap = useMemo(() => {
     const childrenMap = new Map<number, Company[]>();
@@ -837,6 +1185,46 @@ function App() {
     return rows;
   }, [isGroupAdmin, selectedCompanyIds, userFilters, users]);
 
+  const resolveTargetUserCompanyId = useCallback(
+    (role?: string, companyId?: number) => {
+      if (role === "group_admin") {
+        return undefined;
+      }
+      if (isSubAdmin) {
+        return currentUser?.company_id || undefined;
+      }
+      if (!companyId || companyId === 0) {
+        return undefined;
+      }
+      return companyId;
+    },
+    [currentUser?.company_id, isSubAdmin]
+  );
+
+  const getOrgDimensionLabel = useCallback(
+    (item: OrgDimension) => {
+      const scopeName = item.company_name || (item.company_id ? companyMap.get(item.company_id) : GROUP_LABEL);
+      return `${item.name}${scopeName ? `（${scopeName}）` : ""}`;
+    },
+    [companyMap]
+  );
+
+  const getRoleOptionsByCompany = useCallback(
+    (targetCompanyId?: number) =>
+      activeOrgRoles
+        .filter((item) => item.company_id == null || (targetCompanyId ? item.company_id === targetCompanyId : false))
+        .map((item) => ({ value: item.id, label: getOrgDimensionLabel(item) })),
+    [activeOrgRoles, getOrgDimensionLabel]
+  );
+
+  const getPositionOptionsByCompany = useCallback(
+    (targetCompanyId?: number) =>
+      activeOrgPositions
+        .filter((item) => item.company_id == null || (targetCompanyId ? item.company_id === targetCompanyId : false))
+        .map((item) => ({ value: item.id, label: getOrgDimensionLabel(item) })),
+    [activeOrgPositions, getOrgDimensionLabel]
+  );
+
   const handleLogin = async () => {
     try {
       const values = await loginForm.validateFields();
@@ -882,7 +1270,11 @@ function App() {
     setOpportunities([]);
     setCompanies([]);
     setUsers([]);
+    setOrgRoles([]);
+    setOrgPositions([]);
     setActivities([]);
+    resetMessageCenter();
+    setWorkflowFocusRequest(null);
     setActiveView("opportunities");
     message.success("已退出登录");
   };
@@ -1022,13 +1414,6 @@ function App() {
       return { start: start.isValid() ? start : undefined };
     }
     return {};
-  };
-
-  const toNumber = (value: any) => {
-    if (value === null || value === undefined || value === "") return undefined;
-    if (typeof value === "number" && !Number.isNaN(value)) return value;
-    const parsed = parseInt(String(value), 10);
-    return Number.isNaN(parsed) ? undefined : parsed;
   };
 
   const applyAnalysisToForm = () => {
@@ -1477,17 +1862,34 @@ function App() {
         role: user.role,
         company_id: user.company_id ?? 0,
         status: user.status || "active",
-        password: undefined
+        password: undefined,
+        org_role_ids: user.org_role_ids || [],
+        org_position_ids: user.org_position_ids || []
       });
     } else {
       setUserEditing(null);
       userForm.resetFields();
       if (isSubAdmin && currentUser?.company_id) {
-        userForm.setFieldsValue({ company_id: currentUser.company_id ?? undefined });
+        userForm.setFieldsValue({
+          company_id: currentUser.company_id ?? undefined,
+          org_role_ids: [],
+          org_position_ids: []
+        });
+      } else {
+        userForm.setFieldsValue({
+          org_role_ids: [],
+          org_position_ids: []
+        });
       }
     }
     if (!companies.length) {
       fetchCompanies();
+    }
+    if (!orgRoles.length) {
+      fetchOrgRoles();
+    }
+    if (!orgPositions.length) {
+      fetchOrgPositions();
     }
     setUserDrawerOpen(true);
   };
@@ -1533,9 +1935,20 @@ function App() {
     try {
       const values = await userForm.validateFields();
       setUserSaving(true);
+      const targetCompanyId = resolveTargetUserCompanyId(values.role, values.company_id);
+      const allowedRoleIds = new Set(getRoleOptionsByCompany(targetCompanyId).map((item) => Number(item.value)));
+      const allowedPositionIds = new Set(
+        getPositionOptionsByCompany(targetCompanyId).map((item) => Number(item.value))
+      );
+      const normalizedRoleIds = (values.org_role_ids || []).filter((item) => allowedRoleIds.has(Number(item)));
+      const normalizedPositionIds = (values.org_position_ids || []).filter((item) =>
+        allowedPositionIds.has(Number(item))
+      );
       const payload: Record<string, any> = {
         ...values,
-        company_id: values.role === "group_admin" ? undefined : values.company_id
+        company_id: targetCompanyId,
+        org_role_ids: normalizedRoleIds,
+        org_position_ids: normalizedPositionIds
       };
       if (!payload.password) {
         delete payload.password;
@@ -1563,6 +1976,218 @@ function App() {
     } finally {
       setUserSaving(false);
     }
+  };
+
+  const canEditOrgDimension = (item: OrgDimension) =>
+    isGroupAdmin || (isSubAdmin && Boolean(currentUser?.company_id) && item.company_id === currentUser.company_id);
+
+  const handleOpenOrgRoleDrawer = (item?: OrgDimension) => {
+    if (item && !canEditOrgDimension(item)) {
+      message.error("仅可编辑本公司角色。");
+      return;
+    }
+    if (item) {
+      setOrgRoleEditing(item);
+      orgRoleForm.setFieldsValue({
+        name: item.name,
+        code: item.code || undefined,
+        company_id: item.company_id ?? 0,
+        status: item.status || "active"
+      });
+    } else {
+      setOrgRoleEditing(null);
+      orgRoleForm.resetFields();
+      orgRoleForm.setFieldsValue({
+        status: "active",
+        company_id: isSubAdmin ? currentUser?.company_id ?? undefined : 0
+      });
+    }
+    setOrgRoleDrawerOpen(true);
+  };
+
+  const handleOpenOrgPositionDrawer = (item?: OrgDimension) => {
+    if (item && !canEditOrgDimension(item)) {
+      message.error("仅可编辑本公司岗位。");
+      return;
+    }
+    if (item) {
+      setOrgPositionEditing(item);
+      orgPositionForm.setFieldsValue({
+        name: item.name,
+        code: item.code || undefined,
+        company_id: item.company_id ?? 0,
+        status: item.status || "active"
+      });
+    } else {
+      setOrgPositionEditing(null);
+      orgPositionForm.resetFields();
+      orgPositionForm.setFieldsValue({
+        status: "active",
+        company_id: isSubAdmin ? currentUser?.company_id ?? undefined : 0
+      });
+    }
+    setOrgPositionDrawerOpen(true);
+  };
+
+  const handleSaveOrgRole = async () => {
+    try {
+      const values = await orgRoleForm.validateFields();
+      setOrgRoleSaving(true);
+      const payload: Record<string, unknown> = {
+        name: values.name?.trim(),
+        code: values.code?.trim() || undefined,
+        status: values.status || "active"
+      };
+      if (isSubAdmin) {
+        payload.company_id = currentUser?.company_id ?? undefined;
+      } else {
+        payload.company_id = values.company_id === 0 ? 0 : values.company_id;
+      }
+      const response = await apiFetch(orgRoleEditing ? `/org/roles/${orgRoleEditing.id}` : "/org/roles", {
+        method: orgRoleEditing ? "PATCH" : "POST",
+        headers: headers(),
+        body: JSON.stringify(payload)
+      });
+      const body = await response.json();
+      if (!response.ok) {
+        const errorCode = body.error;
+        const errorMessage =
+          errorCode === "role_name_exists"
+            ? "同一范围下角色名称已存在。"
+            : errorCode === "role_code_exists"
+              ? "角色编码已存在。"
+              : errorCode === "invalid_company"
+                ? "公司范围无效。"
+                : errorCode === "forbidden"
+                  ? "无权限操作该角色。"
+                  : body.error || "保存失败";
+        throw new Error(errorMessage);
+      }
+      message.success(orgRoleEditing ? "角色已更新。" : "角色已创建。");
+      setOrgRoleDrawerOpen(false);
+      setOrgRoleEditing(null);
+      orgRoleForm.resetFields();
+      refreshOrg();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "保存失败";
+      message.error(errorMessage);
+    } finally {
+      setOrgRoleSaving(false);
+    }
+  };
+
+  const handleSaveOrgPosition = async () => {
+    try {
+      const values = await orgPositionForm.validateFields();
+      setOrgPositionSaving(true);
+      const payload: Record<string, unknown> = {
+        name: values.name?.trim(),
+        code: values.code?.trim() || undefined,
+        status: values.status || "active"
+      };
+      if (isSubAdmin) {
+        payload.company_id = currentUser?.company_id ?? undefined;
+      } else {
+        payload.company_id = values.company_id === 0 ? 0 : values.company_id;
+      }
+      const response = await apiFetch(
+        orgPositionEditing ? `/org/positions/${orgPositionEditing.id}` : "/org/positions",
+        {
+          method: orgPositionEditing ? "PATCH" : "POST",
+          headers: headers(),
+          body: JSON.stringify(payload)
+        }
+      );
+      const body = await response.json();
+      if (!response.ok) {
+        const errorCode = body.error;
+        const errorMessage =
+          errorCode === "position_name_exists"
+            ? "同一范围下岗位名称已存在。"
+            : errorCode === "position_code_exists"
+              ? "岗位编码已存在。"
+              : errorCode === "invalid_company"
+                ? "公司范围无效。"
+                : errorCode === "forbidden"
+                  ? "无权限操作该岗位。"
+                  : body.error || "保存失败";
+        throw new Error(errorMessage);
+      }
+      message.success(orgPositionEditing ? "岗位已更新。" : "岗位已创建。");
+      setOrgPositionDrawerOpen(false);
+      setOrgPositionEditing(null);
+      orgPositionForm.resetFields();
+      refreshOrg();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "保存失败";
+      message.error(errorMessage);
+    } finally {
+      setOrgPositionSaving(false);
+    }
+  };
+
+  const handleDeleteOrgRole = (item: OrgDimension) => {
+    if (!canEditOrgDimension(item)) {
+      message.error("仅可删除本公司角色。");
+      return;
+    }
+    Modal.confirm({
+      title: `删除角色「${item.name}」？`,
+      content: "删除后将自动移除相关人员绑定。",
+      okText: "",
+      cancelText: "",
+      okButtonProps: { danger: true, icon: <DeleteOutlined />, "aria-label": "删除" },
+      cancelButtonProps: { icon: <CloseOutlined />, "aria-label": "取消" },
+      onOk: async () => {
+        try {
+          const response = await apiFetch(`/org/roles/${item.id}`, {
+            method: "DELETE",
+            headers: headers()
+          });
+          const body = await response.json();
+          if (!response.ok) {
+            throw new Error(body.error || "删除失败");
+          }
+          message.success("角色已删除。");
+          refreshOrg();
+        } catch (err) {
+          const errorMessage = err instanceof Error ? err.message : "删除失败";
+          message.error(errorMessage);
+        }
+      }
+    });
+  };
+
+  const handleDeleteOrgPosition = (item: OrgDimension) => {
+    if (!canEditOrgDimension(item)) {
+      message.error("仅可删除本公司岗位。");
+      return;
+    }
+    Modal.confirm({
+      title: `删除岗位「${item.name}」？`,
+      content: "删除后将自动移除相关人员绑定。",
+      okText: "",
+      cancelText: "",
+      okButtonProps: { danger: true, icon: <DeleteOutlined />, "aria-label": "删除" },
+      cancelButtonProps: { icon: <CloseOutlined />, "aria-label": "取消" },
+      onOk: async () => {
+        try {
+          const response = await apiFetch(`/org/positions/${item.id}`, {
+            method: "DELETE",
+            headers: headers()
+          });
+          const body = await response.json();
+          if (!response.ok) {
+            throw new Error(body.error || "删除失败");
+          }
+          message.success("岗位已删除。");
+          refreshOrg();
+        } catch (err) {
+          const errorMessage = err instanceof Error ? err.message : "删除失败";
+          message.error(errorMessage);
+        }
+      }
+    });
   };
 
   const handleDeleteCompany = (company: Company) => {
@@ -1853,10 +2478,19 @@ function App() {
   };
 
   const handleMenuClick: MenuProps["onClick"] = ({ key }) => {
-    if (key === "org" || key === "opportunities" || key === "normal" || key === "host") {
+    if (
+      key === "org" ||
+      key === "opportunities" ||
+      key === "normal" ||
+      key === "host" ||
+      key === "workflow"
+    ) {
       setActiveView(key as ActiveView);
       if (key === "opportunities") {
         setOverviewType("all");
+      }
+      if (key === "host") {
+        setHostOpportunityTab("host_list");
       }
     }
   };
@@ -1865,7 +2499,8 @@ function App() {
     org: "组织架构",
     opportunities: "首页",
     normal: "普通商机",
-    host: "主场商机"
+    host: "主场商机",
+    workflow: "流程审批"
   };
 
   const hostFieldKeys: (keyof CreateFormValues)[] = [
@@ -2161,6 +2796,127 @@ function App() {
   const opportunityColumns =
     activeView === "normal" ? normalColumns : activeView === "host" ? hostColumns : allColumns;
 
+  const formatHostPoolDateRange = (record: HostPoolEvent) => {
+    const start = record.exhibition_start_date;
+    const end = record.exhibition_end_date;
+    if (start && end) return `${start} ~ ${end}`;
+    return start || end || "-";
+  };
+
+  const hostPoolColumns: ColumnsType<HostPoolEvent> = [
+    {
+      title: "展会",
+      dataIndex: "name",
+      key: "name",
+      render: (value: string, record) => (
+        <Space direction="vertical" size={0}>
+          <Text strong>{value || "-"}</Text>
+          <Text type="secondary">{record.alias_name || record.source_site || "-"}</Text>
+        </Space>
+      )
+    },
+    {
+      title: "时间",
+      key: "dates",
+      render: (_, record) => formatHostPoolDateRange(record)
+    },
+    {
+      title: "行业",
+      dataIndex: "industry",
+      key: "industry",
+      render: (value?: string | null) => value || "-"
+    },
+    {
+      title: "城市",
+      dataIndex: "city",
+      key: "city",
+      render: (value?: string | null) => value || "-"
+    },
+    {
+      title: "主办方",
+      dataIndex: "organizer_name",
+      key: "organizer_name",
+      render: (value?: string | null) => value || "-"
+    },
+    {
+      title: "展馆/地址",
+      key: "venue",
+      render: (_, record) => {
+        const parts = [record.venue_name, record.venue_address].filter(Boolean);
+        return parts.length ? parts.join(" · ") : "-";
+      }
+    },
+    {
+      title: "规模",
+      key: "scale",
+      render: (_, record) => {
+        const parts = [];
+        if (record.exhibition_area_sqm) parts.push(`${record.exhibition_area_sqm}㎡`);
+        if (record.exhibitors_count) parts.push(`${record.exhibitors_count}展商`);
+        if (record.visitors_count) parts.push(`${record.visitors_count}观众`);
+        return parts.length ? parts.join(" / ") : "-";
+      }
+    },
+    {
+      title: "热度",
+      dataIndex: "heat_score",
+      key: "heat_score",
+      width: 100,
+      render: (value?: number | null) => (value ? value.toLocaleString() : "-")
+    },
+    {
+      title: "状态",
+      dataIndex: "pool_status",
+      key: "pool_status",
+      width: 100,
+      render: (value?: string | null, record?) => {
+        if (!value) return "-";
+        if (value === "converted") {
+          return (
+            <Tag color="green">
+              已转商机{record?.converted_opportunity_id ? ` #${record.converted_opportunity_id}` : ""}
+            </Tag>
+          );
+        }
+        if (value === "archived") {
+          return <Tag color="default">已归档</Tag>;
+        }
+        return <Tag color="blue">公海</Tag>;
+      }
+    },
+    {
+      title: "来源",
+      dataIndex: "source_url",
+      key: "source_url",
+      render: (value?: string | null) =>
+        value ? (
+          <a href={value} target="_blank" rel="noreferrer">
+            去展网链接
+          </a>
+        ) : (
+          "-"
+        )
+    },
+    {
+      title: "操作",
+      key: "actions",
+      fixed: "right",
+      width: 120,
+      render: (_, record) => (
+        <Tooltip title={record.pool_status === "converted" ? "已转为商机" : "转为主场商机"}>
+          <Button
+            type="text"
+            icon={<CheckOutlined />}
+            aria-label="转为主场商机"
+            disabled={record.pool_status === "converted"}
+            loading={hostPoolConvertingId === record.id}
+            onClick={() => convertHostPoolEvent(record)}
+          />
+        </Tooltip>
+      )
+    }
+  ];
+
   const userColumns: ColumnsType<User> = [
     {
       title: "姓名",
@@ -2184,6 +2940,36 @@ function App() {
         }
         return companyMap.get(value) || `#${value}`;
       }
+    },
+    {
+      title: "组织角色",
+      dataIndex: "org_role_names",
+      key: "org_role_names",
+      render: (value?: string[]) =>
+        value && value.length ? (
+          <Space size={[4, 4]} wrap>
+            {value.map((name) => (
+              <Tag key={name}>{name}</Tag>
+            ))}
+          </Space>
+        ) : (
+          "-"
+        )
+    },
+    {
+      title: "岗位",
+      dataIndex: "org_position_names",
+      key: "org_position_names",
+      render: (value?: string[]) =>
+        value && value.length ? (
+          <Space size={[4, 4]} wrap>
+            {value.map((name) => (
+              <Tag key={name}>{name}</Tag>
+            ))}
+          </Space>
+        ) : (
+          "-"
+        )
     },
     {
       title: "邮箱",
@@ -2239,6 +3025,138 @@ function App() {
           </Tooltip>
         </Space>
       )
+    }
+  ];
+
+  const orgRoleColumns: ColumnsType<OrgDimension> = [
+    {
+      title: "角色名称",
+      dataIndex: "name",
+      key: "name",
+      render: (value: string) => <Text strong>{value}</Text>
+    },
+    {
+      title: "编码",
+      dataIndex: "code",
+      key: "code",
+      render: (value?: string | null) => value || "-"
+    },
+    {
+      title: "范围",
+      dataIndex: "company_id",
+      key: "company_id",
+      render: (value?: number | null, record?: OrgDimension) =>
+        value ? record?.company_name || companyMap.get(value) || `#${value}` : GROUP_LABEL
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
+      render: (value?: string | null) => {
+        const label = value ? USER_STATUS_LABELS[value] : "";
+        return label ? <Tag color={value === "active" ? "green" : "red"}>{label}</Tag> : "-";
+      }
+    },
+    {
+      title: "更新时间",
+      dataIndex: "updated_at",
+      key: "updated_at",
+      render: (value?: string | null) => (value ? new Date(value).toLocaleString() : "-")
+    },
+    {
+      title: "操作",
+      key: "actions",
+      width: 120,
+      render: (_, record) =>
+        canEditOrgDimension(record) ? (
+          <Space>
+            <Tooltip title="编辑">
+              <Button
+                type="text"
+                icon={<EditOutlined />}
+                aria-label="编辑角色"
+                onClick={() => handleOpenOrgRoleDrawer(record)}
+              />
+            </Tooltip>
+            <Tooltip title="删除">
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                aria-label="删除角色"
+                danger
+                onClick={() => handleDeleteOrgRole(record)}
+              />
+            </Tooltip>
+          </Space>
+        ) : (
+          <Text type="secondary">只读</Text>
+        )
+    }
+  ];
+
+  const orgPositionColumns: ColumnsType<OrgDimension> = [
+    {
+      title: "岗位名称",
+      dataIndex: "name",
+      key: "name",
+      render: (value: string) => <Text strong>{value}</Text>
+    },
+    {
+      title: "编码",
+      dataIndex: "code",
+      key: "code",
+      render: (value?: string | null) => value || "-"
+    },
+    {
+      title: "范围",
+      dataIndex: "company_id",
+      key: "company_id",
+      render: (value?: number | null, record?: OrgDimension) =>
+        value ? record?.company_name || companyMap.get(value) || `#${value}` : GROUP_LABEL
+    },
+    {
+      title: "状态",
+      dataIndex: "status",
+      key: "status",
+      render: (value?: string | null) => {
+        const label = value ? USER_STATUS_LABELS[value] : "";
+        return label ? <Tag color={value === "active" ? "green" : "red"}>{label}</Tag> : "-";
+      }
+    },
+    {
+      title: "更新时间",
+      dataIndex: "updated_at",
+      key: "updated_at",
+      render: (value?: string | null) => (value ? new Date(value).toLocaleString() : "-")
+    },
+    {
+      title: "操作",
+      key: "actions",
+      width: 120,
+      render: (_, record) =>
+        canEditOrgDimension(record) ? (
+          <Space>
+            <Tooltip title="编辑">
+              <Button
+                type="text"
+                icon={<EditOutlined />}
+                aria-label="编辑岗位"
+                onClick={() => handleOpenOrgPositionDrawer(record)}
+              />
+            </Tooltip>
+            <Tooltip title="删除">
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                aria-label="删除岗位"
+                danger
+                onClick={() => handleDeleteOrgPosition(record)}
+              />
+            </Tooltip>
+          </Space>
+        ) : (
+          <Text type="secondary">只读</Text>
+        )
     }
   ];
 
@@ -2310,6 +3228,7 @@ function App() {
   const navigationItems = [
     { key: "opportunities", label: "首页" },
     canManageOrg ? { key: "org", label: "组织架构" } : null,
+    { key: "workflow", label: "流程审批" },
     { key: "normal", label: "普通商机" },
     { key: "host", label: "主场商机" }
   ].filter(Boolean) as { key: string; label: string }[];
@@ -2426,6 +3345,17 @@ function App() {
       <Layout>
         <Header className="app-header">
           <div className="user-bar">
+            <Tooltip title="消息中心">
+              <Badge count={messageUnreadCount} size="small" overflowCount={99}>
+                <Button
+                  type="text"
+                  className="message-center-trigger"
+                  icon={<BellOutlined />}
+                  aria-label="消息中心"
+                  onClick={openMessageCenter}
+                />
+              </Badge>
+            </Tooltip>
             <Dropdown menu={{ items: userMenuItems }} trigger={["click"]} placement="bottomRight">
               <Avatar className="user-avatar" size="large">
                 {userInitial}
@@ -2437,9 +3367,9 @@ function App() {
         <Content className="app-content">
           <>
           {activeView === "org" ? (
-            <div className="org-layout">
-              <Card className="table-card" title="组织架构树" loading={companyLoading}>
-                {orgTreeData.length ? (
+	            <div className="org-layout">
+	              <Card className="table-card" title="组织架构树" loading={companyLoading}>
+	                {orgTreeData.length ? (
                   <Tree
                     showLine={{ showLeafIcon: false }}
                     defaultExpandAll
@@ -2448,99 +3378,171 @@ function App() {
                     titleRender={(node) => renderOrgTitle(node as OrgTreeNode)}
                     onSelect={handleOrgSelect}
                   />
-                ) : (
-                  <Text type="secondary">暂无组织架构数据。</Text>
-                )}
-              </Card>
-              <Card
-                className="table-card"
-                title="员工列表"
-                extra={
-                  <Tooltip title="新建员工">
-                    <Button
-                      type="primary"
-                      icon={<UserAddOutlined />}
-                      aria-label="新建员工"
-                      onClick={() => handleOpenUserDrawer()}
-                    />
-                  </Tooltip>
+	                ) : (
+	                  <Text type="secondary">暂无组织架构数据。</Text>
+	                )}
+	              </Card>
+	              <Card
+	                className="table-card"
+	                title="员工与角色岗位"
+	                extra={
+	                  orgManageTab === "users" ? (
+	                    <Tooltip title="新建员工">
+	                      <Button
+	                        type="primary"
+	                        icon={<UserAddOutlined />}
+	                        aria-label="新建员工"
+	                        onClick={() => handleOpenUserDrawer()}
+	                      />
+	                    </Tooltip>
+	                  ) : orgManageTab === "roles" ? (
+	                    <Button
+	                      type="primary"
+	                      icon={<PlusOutlined />}
+	                      aria-label="新建角色"
+	                      onClick={() => handleOpenOrgRoleDrawer()}
+	                    >
+	                      新建角色
+	                    </Button>
+	                  ) : (
+	                    <Button
+	                      type="primary"
+	                      icon={<PlusOutlined />}
+	                      aria-label="新建岗位"
+	                      onClick={() => handleOpenOrgPositionDrawer()}
+	                    >
+	                      新建岗位
+	                    </Button>
+	                  )
+	                }
+	              >
+	                <Tabs
+	                  activeKey={orgManageTab}
+	                  onChange={(key) => setOrgManageTab(key as "users" | "roles" | "positions")}
+	                >
+	                  <Tabs.TabPane tab={`员工 (${filteredUsers.length})`} key="users">
+	                    <Form
+	                      form={userFilterForm}
+	                      layout="vertical"
+	                      onFinish={handleUserFilter}
+	                      style={{ marginBottom: 12 }}
+	                    >
+	                      <Row gutter={[16, 8]}>
+	                        <Col xs={24} sm={12} md={6}>
+	                          <Form.Item name="name" label="姓名">
+	                            <Input placeholder="姓名" allowClear />
+	                          </Form.Item>
+	                        </Col>
+	                        <Col xs={24} sm={12} md={6}>
+	                          <Form.Item name="role" label="角色">
+	                            <Select allowClear placeholder="全部">
+	                              {roleOptions.map(([value, label]) => (
+	                                <Option key={value} value={value}>
+	                                  {label}
+	                                </Option>
+	                              ))}
+	                            </Select>
+	                          </Form.Item>
+	                        </Col>
+	                        {isGroupAdmin && (
+	                          <Col xs={24} sm={12} md={6}>
+	                            <Form.Item name="company_id" label="所属公司">
+	                              <Select allowClear placeholder="全部">
+	                                <Option value={0}>{GROUP_LABEL}</Option>
+	                                {companies.map((company) => (
+	                                  <Option key={company.id} value={company.id}>
+	                                    {company.name}
+	                                  </Option>
+	                                ))}
+	                              </Select>
+	                            </Form.Item>
+	                          </Col>
+	                        )}
+	                        <Col xs={24} sm={12} md={6}>
+	                          <Form.Item name="status" label="状态">
+	                            <Select allowClear placeholder="全部">
+	                              <Option value="active">启用</Option>
+	                              <Option value="inactive">停用</Option>
+	                            </Select>
+	                          </Form.Item>
+	                        </Col>
+	                      </Row>
+	                      <Space>
+	                        <Tooltip title="应用筛选">
+	                          <Button
+	                            type="primary"
+	                            htmlType="submit"
+	                            loading={userLoading}
+	                            icon={<FilterOutlined />}
+	                            aria-label="应用筛选"
+	                          />
+	                        </Tooltip>
+	                        <Tooltip title="重置">
+	                          <Button
+	                            icon={<UndoOutlined />}
+	                            aria-label="重置"
+	                            onClick={handleUserReset}
+	                          />
+	                        </Tooltip>
+	                      </Space>
+	                    </Form>
+	                    <Table
+	                      rowKey="id"
+	                      columns={userColumns}
+	                      dataSource={filteredUsers}
+	                      loading={userLoading}
+	                      scroll={{ x: "max-content" }}
+	                      pagination={{ pageSize: 8 }}
+	                    />
+	                  </Tabs.TabPane>
+	                  <Tabs.TabPane tab={`角色 (${orgRoles.length})`} key="roles">
+	                    <Table
+	                      rowKey="id"
+	                      columns={orgRoleColumns}
+	                      dataSource={orgRoles}
+	                      loading={orgRoleLoading}
+	                      scroll={{ x: "max-content" }}
+	                      pagination={{ pageSize: 6 }}
+	                    />
+	                  </Tabs.TabPane>
+	                  <Tabs.TabPane tab={`岗位 (${orgPositions.length})`} key="positions">
+	                    <Table
+	                      rowKey="id"
+	                      columns={orgPositionColumns}
+	                      dataSource={orgPositions}
+	                      loading={orgPositionLoading}
+	                      scroll={{ x: "max-content" }}
+	                      pagination={{ pageSize: 6 }}
+	                    />
+	                  </Tabs.TabPane>
+	                </Tabs>
+	              </Card>
+	            </div>
+          ) : activeView === "workflow" ? (
+            <WorkflowErrorBoundary>
+              <Suspense
+                fallback={
+                  <Card loading style={{ minHeight: 360 }}>
+                    <div />
+                  </Card>
                 }
               >
-                <Form
-                  form={userFilterForm}
-                  layout="vertical"
-                  onFinish={handleUserFilter}
-                  style={{ marginBottom: 12 }}
-                >
-                  <Row gutter={[16, 8]}>
-                    <Col xs={24} sm={12} md={6}>
-                      <Form.Item name="name" label="姓名">
-                        <Input placeholder="姓名" allowClear />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} sm={12} md={6}>
-                      <Form.Item name="role" label="角色">
-                        <Select allowClear placeholder="全部">
-                          {roleOptions.map(([value, label]) => (
-                            <Option key={value} value={value}>
-                              {label}
-                            </Option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    {isGroupAdmin && (
-                      <Col xs={24} sm={12} md={6}>
-                        <Form.Item name="company_id" label="所属公司">
-                          <Select allowClear placeholder="全部">
-                            <Option value={0}>{GROUP_LABEL}</Option>
-                            {companies.map((company) => (
-                              <Option key={company.id} value={company.id}>
-                                {company.name}
-                              </Option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      </Col>
-                    )}
-                    <Col xs={24} sm={12} md={6}>
-                      <Form.Item name="status" label="状态">
-                        <Select allowClear placeholder="全部">
-                          <Option value="active">启用</Option>
-                          <Option value="inactive">停用</Option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Space>
-                    <Tooltip title="应用筛选">
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        loading={userLoading}
-                        icon={<FilterOutlined />}
-                        aria-label="应用筛选"
-                      />
-                    </Tooltip>
-                    <Tooltip title="重置">
-                      <Button
-                        icon={<UndoOutlined />}
-                        aria-label="重置"
-                        onClick={handleUserReset}
-                      />
-                    </Tooltip>
-                  </Space>
-                </Form>
-                <Table
-                  rowKey="id"
-                  columns={userColumns}
-                  dataSource={filteredUsers}
-                  loading={userLoading}
-                  scroll={{ x: "max-content" }}
-                  pagination={{ pageSize: 8 }}
+                <WorkflowCenter
+                  apiBase={API_BASE}
+                  userId={userId}
+                  currentUser={currentUser}
+                  companies={workflowCompanies}
+                  users={workflowUsers}
+                  orgRoleOptions={workflowRoleOptions}
+                  orgPositionOptions={workflowPositionOptions}
+                  isGroupAdmin={isGroupAdmin}
+                  isSubAdmin={isSubAdmin}
+                  refreshOrg={refreshOrg}
+                  focusRequest={workflowFocusRequest}
+                  onFocusHandled={handleWorkflowFocusHandled}
                 />
-              </Card>
-            </div>
+              </Suspense>
+            </WorkflowErrorBoundary>
           ) : (
             <>
               {activeView === "opportunities" && (
@@ -2584,152 +3586,415 @@ function App() {
               )}
 
               {activeView !== "opportunities" && (
-                <>
-                  <Card className="filter-card">
-                    <Form form={filterForm} layout="vertical" onFinish={() => fetchOpportunities()}>
-                      <Row gutter={[16, 16]}>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="name" label="商机名称">
-                            <Search
-                              placeholder="关键词"
-                              allowClear
-                              onSearch={() => fetchOpportunities()}
-                            />
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="status" label="状态">
-                            <Select allowClear placeholder="全部">
-                              <Option value="new">新建</Option>
-                              <Option value="assigned">已分配</Option>
-                              <Option value="in_progress">跟进中</Option>
-                              <Option value="valid">有效</Option>
-                              <Option value="invalid">无效</Option>
-                            </Select>
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="stage" label="阶段">
-                            <Select allowClear placeholder="全部">
-                              <Option value="cold">冷淡</Option>
-                              <Option value="interest">意向</Option>
-                              <Option value="need_defined">需求明确</Option>
-                              <Option value="bid_preparing">投标准备</Option>
-                              <Option value="ready_for_handoff">待移交</Option>
-                            </Select>
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="city" label="城市">
-                            <Input placeholder="城市" />
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="industry" label="行业">
-                            <Input placeholder="行业" />
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="owner_id" label="负责人">
-                            <Select
-                              allowClear
-                              showSearch
-                              placeholder="搜索负责人名称"
-                              optionFilterProp="label"
-                              filterOption={(input, option) =>
-                                String(option?.label ?? "")
-                                  .toLowerCase()
-                                  .includes(input.toLowerCase())
-                              }
-                              options={users.map((user) => ({
-                                value: user.id,
-                                label: user.name
-                              }))}
-                            >
-                            </Select>
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="company_id" label={`子公司（${GROUP_LABEL}）`}>
-                            <Select
-                              allowClear
-                              showSearch
-                              placeholder="搜索子公司名称"
-                              optionFilterProp="label"
-                              filterOption={(input, option) =>
-                                String(option?.label ?? "")
-                                  .toLowerCase()
-                                  .includes(input.toLowerCase())
-                              }
-                              options={companies.map((company) => ({
-                                value: company.id,
-                                label: company.name
-                              }))}
-                            />
-                          </Form.Item>
-                        </Col>
-                        <Col xs={24} sm={12} md={6}>
-                          <Form.Item name="source" label="来源">
-                            <Input placeholder="来源" />
-                          </Form.Item>
-                        </Col>
-                      </Row>
-                    </Form>
-                  </Card>
+                activeView === "host" ? (
+                  <Card className="table-card">
+                    <Tabs
+                      activeKey={hostOpportunityTab}
+                      onChange={(key) => setHostOpportunityTab(key as "host_list" | "host_pool")}
+                    >
+                      <Tabs.TabPane tab="主场商机列表" key="host_list">
+                        <Card className="filter-card">
+                          <Form form={filterForm} layout="vertical" onFinish={() => fetchOpportunities()}>
+                            <Row gutter={[16, 16]}>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="name" label="商机名称">
+                                  <Search
+                                    placeholder="关键词"
+                                    allowClear
+                                    onSearch={() => fetchOpportunities()}
+                                  />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="status" label="状态">
+                                  <Select allowClear placeholder="全部">
+                                    <Option value="new">新建</Option>
+                                    <Option value="assigned">已分配</Option>
+                                    <Option value="in_progress">跟进中</Option>
+                                    <Option value="valid">有效</Option>
+                                    <Option value="invalid">无效</Option>
+                                  </Select>
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="stage" label="阶段">
+                                  <Select allowClear placeholder="全部">
+                                    <Option value="cold">冷淡</Option>
+                                    <Option value="interest">意向</Option>
+                                    <Option value="need_defined">需求明确</Option>
+                                    <Option value="bid_preparing">投标准备</Option>
+                                    <Option value="ready_for_handoff">待移交</Option>
+                                  </Select>
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="city" label="城市">
+                                  <Input placeholder="城市" />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="industry" label="行业">
+                                  <Input placeholder="行业" />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="owner_id" label="负责人">
+                                  <Select
+                                    allowClear
+                                    showSearch
+                                    placeholder="搜索负责人名称"
+                                    optionFilterProp="label"
+                                    filterOption={(input, option) =>
+                                      String(option?.label ?? "")
+                                        .toLowerCase()
+                                        .includes(input.toLowerCase())
+                                    }
+                                    options={users.map((user) => ({
+                                      value: user.id,
+                                      label: user.name
+                                    }))}
+                                  >
+                                  </Select>
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="company_id" label={`子公司（${GROUP_LABEL}）`}>
+                                  <Select
+                                    allowClear
+                                    showSearch
+                                    placeholder="搜索子公司名称"
+                                    optionFilterProp="label"
+                                    filterOption={(input, option) =>
+                                      String(option?.label ?? "")
+                                        .toLowerCase()
+                                        .includes(input.toLowerCase())
+                                    }
+                                    options={companies.map((company) => ({
+                                      value: company.id,
+                                      label: company.name
+                                    }))}
+                                  />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="source" label="来源">
+                                  <Input placeholder="来源" />
+                                </Form.Item>
+                              </Col>
+                            </Row>
+                          </Form>
+                        </Card>
 
-                  <Card
-                    className="table-card"
-                    title={tableTitle}
-                    extra={
-                      currentUser ? (
-                        <Space size="middle">
-                          <Tooltip title="导入 Excel">
-                            <Button
-                              shape="circle"
-                              size="large"
-                              icon={<UploadOutlined />}
-                              onClick={handleOpenImport}
-                            />
-                          </Tooltip>
-                          <Tooltip title="新建商机">
-                            <Button
-                              type="primary"
-                              shape="circle"
-                              size="large"
-                              icon={<PlusOutlined />}
-                              onClick={handleOpenCreate}
-                              aria-label="新建商机"
-                            />
-                          </Tooltip>
-                        </Space>
-                      ) : null
-                    }
-                  >
-                    <Table
-                      rowKey="id"
-                      columns={opportunityColumns}
-                      dataSource={opportunities}
-                      loading={loading}
-                      scroll={{ x: "max-content" }}
-                      pagination={{
-                        ...opportunityPagination,
-                        pageSizeOptions: ["10", "20", "50", "100"],
-                        showSizeChanger: true,
-                        showTotal: (total: number) => `共 ${total} 条`
-                      }}
-                      onRow={(record) => ({
-                        onDoubleClick: () => handleOpenEditOpportunity(record)
-                      })}
-                      onChange={handleOpportunityTableChange}
-                    />
+                        <Card
+                          className="table-card"
+                          title="主场商机列表"
+                          extra={
+                            currentUser ? (
+                              <Space size="middle">
+                                <Tooltip title="导入 Excel">
+                                  <Button
+                                    shape="circle"
+                                    size="large"
+                                    icon={<UploadOutlined />}
+                                    onClick={handleOpenImport}
+                                  />
+                                </Tooltip>
+                                <Tooltip title="新建商机">
+                                  <Button
+                                    type="primary"
+                                    shape="circle"
+                                    size="large"
+                                    icon={<PlusOutlined />}
+                                    onClick={handleOpenCreate}
+                                    aria-label="新建商机"
+                                  />
+                                </Tooltip>
+                              </Space>
+                            ) : null
+                          }
+                        >
+                          <Table
+                            rowKey="id"
+                            columns={opportunityColumns}
+                            dataSource={opportunities}
+                            loading={loading}
+                            scroll={{ x: "max-content" }}
+                            pagination={{
+                              ...opportunityPagination,
+                              pageSizeOptions: ["10", "20", "50", "100"],
+                              showSizeChanger: true,
+                              showTotal: (total: number) => `共 ${total} 条`
+                            }}
+                            onRow={(record) => ({
+                              onDoubleClick: () => handleOpenEditOpportunity(record)
+                            })}
+                            onChange={handleOpportunityTableChange}
+                          />
+                        </Card>
+                      </Tabs.TabPane>
+
+                      <Tabs.TabPane tab="主场商机公海池" key="host_pool">
+                        <Card className="filter-card">
+                          <Form
+                            form={hostPoolFilterForm}
+                            layout="vertical"
+                            onFinish={() => fetchHostPoolEvents({}, { page: 1 })}
+                          >
+                            <Row gutter={[16, 16]}>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="keyword" label="关键词">
+                                  <Search
+                                    placeholder="展会名/主办方/行业/城市"
+                                    allowClear
+                                    onSearch={() => fetchHostPoolEvents({}, { page: 1 })}
+                                  />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="city" label="城市">
+                                  <Input placeholder="城市" allowClear />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="industry" label="行业">
+                                  <Input placeholder="行业" allowClear />
+                                </Form.Item>
+                              </Col>
+                              <Col xs={24} sm={12} md={6}>
+                                <Form.Item name="pool_status" label="状态">
+                                  <Select allowClear placeholder="全部">
+                                    <Option value="active">公海</Option>
+                                    <Option value="converted">已转商机</Option>
+                                    <Option value="archived">已归档</Option>
+                                  </Select>
+                                </Form.Item>
+                              </Col>
+                            </Row>
+                            <Space>
+                              <Tooltip title="查询">
+                                <Button
+                                  type="primary"
+                                  htmlType="submit"
+                                  loading={hostPoolLoading}
+                                  icon={<FilterOutlined />}
+                                  aria-label="查询公海池"
+                                />
+                              </Tooltip>
+                              <Tooltip title="重置">
+                                <Button
+                                  icon={<UndoOutlined />}
+                                  aria-label="重置公海池筛选"
+                                  onClick={() => {
+                                    hostPoolFilterForm.resetFields();
+                                    fetchHostPoolEvents({}, { page: 1 });
+                                  }}
+                                />
+                              </Tooltip>
+                              {canManageOrg && (
+                                <Button
+                                  type="primary"
+                                  loading={hostPoolSyncing}
+                                  icon={<UploadOutlined />}
+                                  onClick={syncHostPoolEvents}
+                                >
+                                  同步去展网国内展会
+                                </Button>
+                              )}
+                            </Space>
+                          </Form>
+                        </Card>
+
+                        <Card className="table-card" title="主场商机公海池">
+                          <Table
+                            rowKey="id"
+                            columns={hostPoolColumns}
+                            dataSource={hostPoolEvents}
+                            loading={hostPoolLoading}
+                            scroll={{ x: "max-content" }}
+                            pagination={{
+                              ...hostPoolPagination,
+                              pageSizeOptions: ["10", "20", "50", "100"],
+                              showSizeChanger: true,
+                              showTotal: (total: number) => `共 ${total} 条`
+                            }}
+                            onChange={(pagination) =>
+                              fetchHostPoolEvents(
+                                {},
+                                {
+                                  page: pagination.current ?? 1,
+                                  pageSize: pagination.pageSize ?? hostPoolPagination.pageSize ?? 10
+                                }
+                              )
+                            }
+                          />
+                        </Card>
+                      </Tabs.TabPane>
+                    </Tabs>
                   </Card>
-                </>
+                ) : (
+                  <>
+                    <Card className="filter-card">
+                      <Form form={filterForm} layout="vertical" onFinish={() => fetchOpportunities()}>
+                        <Row gutter={[16, 16]}>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="name" label="商机名称">
+                              <Search
+                                placeholder="关键词"
+                                allowClear
+                                onSearch={() => fetchOpportunities()}
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="status" label="状态">
+                              <Select allowClear placeholder="全部">
+                                <Option value="new">新建</Option>
+                                <Option value="assigned">已分配</Option>
+                                <Option value="in_progress">跟进中</Option>
+                                <Option value="valid">有效</Option>
+                                <Option value="invalid">无效</Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="stage" label="阶段">
+                              <Select allowClear placeholder="全部">
+                                <Option value="cold">冷淡</Option>
+                                <Option value="interest">意向</Option>
+                                <Option value="need_defined">需求明确</Option>
+                                <Option value="bid_preparing">投标准备</Option>
+                                <Option value="ready_for_handoff">待移交</Option>
+                              </Select>
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="city" label="城市">
+                              <Input placeholder="城市" />
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="industry" label="行业">
+                              <Input placeholder="行业" />
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="owner_id" label="负责人">
+                              <Select
+                                allowClear
+                                showSearch
+                                placeholder="搜索负责人名称"
+                                optionFilterProp="label"
+                                filterOption={(input, option) =>
+                                  String(option?.label ?? "")
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                                }
+                                options={users.map((user) => ({
+                                  value: user.id,
+                                  label: user.name
+                                }))}
+                              >
+                              </Select>
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="company_id" label={`子公司（${GROUP_LABEL}）`}>
+                              <Select
+                                allowClear
+                                showSearch
+                                placeholder="搜索子公司名称"
+                                optionFilterProp="label"
+                                filterOption={(input, option) =>
+                                  String(option?.label ?? "")
+                                    .toLowerCase()
+                                    .includes(input.toLowerCase())
+                                }
+                                options={companies.map((company) => ({
+                                  value: company.id,
+                                  label: company.name
+                                }))}
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col xs={24} sm={12} md={6}>
+                            <Form.Item name="source" label="来源">
+                              <Input placeholder="来源" />
+                            </Form.Item>
+                          </Col>
+                        </Row>
+                      </Form>
+                    </Card>
+
+                    <Card
+                      className="table-card"
+                      title={tableTitle}
+                      extra={
+                        currentUser ? (
+                          <Space size="middle">
+                            <Tooltip title="导入 Excel">
+                              <Button
+                                shape="circle"
+                                size="large"
+                                icon={<UploadOutlined />}
+                                onClick={handleOpenImport}
+                              />
+                            </Tooltip>
+                            <Tooltip title="新建商机">
+                              <Button
+                                type="primary"
+                                shape="circle"
+                                size="large"
+                                icon={<PlusOutlined />}
+                                onClick={handleOpenCreate}
+                                aria-label="新建商机"
+                              />
+                            </Tooltip>
+                          </Space>
+                        ) : null
+                      }
+                    >
+                      <Table
+                        rowKey="id"
+                        columns={opportunityColumns}
+                        dataSource={opportunities}
+                        loading={loading}
+                        scroll={{ x: "max-content" }}
+                        pagination={{
+                          ...opportunityPagination,
+                          pageSizeOptions: ["10", "20", "50", "100"],
+                          showSizeChanger: true,
+                          showTotal: (total: number) => `共 ${total} 条`
+                        }}
+                        onRow={(record) => ({
+                          onDoubleClick: () => handleOpenEditOpportunity(record)
+                        })}
+                        onChange={handleOpportunityTableChange}
+                      />
+                    </Card>
+                  </>
+                )
               )}
             </>
           )}
           </>
         </Content>
       </Layout>
+
+      <MessageCenterDrawer
+        open={messageCenterOpen}
+        loading={messageCenterLoading}
+        scope={messageScope}
+        scopeOptions={messageScopeOptions}
+        items={filteredMessageItems}
+        readMessageIdSet={readMessageIdSet}
+        totalMessageCount={messageItemsCount}
+        onClose={closeMessageCenter}
+        onRefresh={refreshMessages}
+        onScopeChange={setMessageScope}
+        onItemClick={handleMessageItemClick}
+        onMarkRead={markMessageRead}
+        onMarkAllRead={markAllMessagesRead}
+      />
 
       <Drawer
         title={editingOpportunity ? "编辑商机" : "新建商机"}
@@ -3224,11 +4489,151 @@ function App() {
             </Select>
           </Form.Item>
         </Form>
-      </Drawer>
+	      </Drawer>
 
-      <Drawer
-        title={userEditing ? "编辑员工" : "新建员工"}
-        width={500}
+	      <Drawer
+	        title={orgRoleEditing ? "编辑组织角色" : "新建组织角色"}
+	        width={420}
+	        open={orgRoleDrawerOpen}
+	        onClose={() => {
+	          setOrgRoleDrawerOpen(false);
+	          setOrgRoleEditing(null);
+	        }}
+	        footer={
+	          <Space>
+	            <Tooltip title="取消">
+	              <Button
+	                icon={<CloseOutlined />}
+	                aria-label="取消角色编辑"
+	                onClick={() => {
+	                  setOrgRoleDrawerOpen(false);
+	                  setOrgRoleEditing(null);
+	                }}
+	              />
+	            </Tooltip>
+	            <Tooltip title="保存">
+	              <Button
+	                type="primary"
+	                icon={<SaveOutlined />}
+	                aria-label="保存角色"
+	                loading={orgRoleSaving}
+	                onClick={handleSaveOrgRole}
+	              />
+	            </Tooltip>
+	          </Space>
+	        }
+	      >
+	        <Form layout="vertical" form={orgRoleForm} initialValues={{ status: "active", company_id: 0 }}>
+	          <Form.Item name="name" label="角色名称" rules={[{ required: true, message: "必填" }]}>
+	            <Input placeholder="例如：财务审批人" />
+	          </Form.Item>
+	          <Form.Item name="code" label="角色编码">
+	            <Input placeholder="可选，例如 finance_approver" />
+	          </Form.Item>
+	          <Form.Item
+	            name="company_id"
+	            label="角色范围"
+	            rules={isSubAdmin ? [{ required: true, message: "必填" }] : []}
+	          >
+	            <Select
+	              showSearch
+	              optionFilterProp="children"
+	              disabled={isSubAdmin}
+	              placeholder={isSubAdmin ? "固定为本公司" : "集团通用或子公司专属"}
+	            >
+	              {!isSubAdmin && <Option value={0}>{GROUP_LABEL}（集团通用）</Option>}
+	              {(isSubAdmin
+	                ? companies.filter((company) => company.id === currentUser?.company_id)
+	                : companies
+	              ).map((company) => (
+	                <Option key={company.id} value={company.id}>
+	                  {company.name}
+	                </Option>
+	              ))}
+	            </Select>
+	          </Form.Item>
+	          <Form.Item name="status" label="状态">
+	            <Select>
+	              <Option value="active">启用</Option>
+	              <Option value="inactive">停用</Option>
+	            </Select>
+	          </Form.Item>
+	        </Form>
+	      </Drawer>
+
+	      <Drawer
+	        title={orgPositionEditing ? "编辑岗位" : "新建岗位"}
+	        width={420}
+	        open={orgPositionDrawerOpen}
+	        onClose={() => {
+	          setOrgPositionDrawerOpen(false);
+	          setOrgPositionEditing(null);
+	        }}
+	        footer={
+	          <Space>
+	            <Tooltip title="取消">
+	              <Button
+	                icon={<CloseOutlined />}
+	                aria-label="取消岗位编辑"
+	                onClick={() => {
+	                  setOrgPositionDrawerOpen(false);
+	                  setOrgPositionEditing(null);
+	                }}
+	              />
+	            </Tooltip>
+	            <Tooltip title="保存">
+	              <Button
+	                type="primary"
+	                icon={<SaveOutlined />}
+	                aria-label="保存岗位"
+	                loading={orgPositionSaving}
+	                onClick={handleSaveOrgPosition}
+	              />
+	            </Tooltip>
+	          </Space>
+	        }
+	      >
+	        <Form layout="vertical" form={orgPositionForm} initialValues={{ status: "active", company_id: 0 }}>
+	          <Form.Item name="name" label="岗位名称" rules={[{ required: true, message: "必填" }]}>
+	            <Input placeholder="例如：财务经理" />
+	          </Form.Item>
+	          <Form.Item name="code" label="岗位编码">
+	            <Input placeholder="可选，例如 finance_manager" />
+	          </Form.Item>
+	          <Form.Item
+	            name="company_id"
+	            label="岗位范围"
+	            rules={isSubAdmin ? [{ required: true, message: "必填" }] : []}
+	          >
+	            <Select
+	              showSearch
+	              optionFilterProp="children"
+	              disabled={isSubAdmin}
+	              placeholder={isSubAdmin ? "固定为本公司" : "集团通用或子公司专属"}
+	            >
+	              {!isSubAdmin && <Option value={0}>{GROUP_LABEL}（集团通用）</Option>}
+	              {(isSubAdmin
+	                ? companies.filter((company) => company.id === currentUser?.company_id)
+	                : companies
+	              ).map((company) => (
+	                <Option key={company.id} value={company.id}>
+	                  {company.name}
+	                </Option>
+	              ))}
+	            </Select>
+	          </Form.Item>
+	          <Form.Item name="status" label="状态">
+	            <Select>
+	              <Option value="active">启用</Option>
+	              <Option value="inactive">停用</Option>
+	            </Select>
+	          </Form.Item>
+	        </Form>
+	      </Drawer>
+
+	      <Drawer
+	        title={userEditing ? "编辑员工" : "新建员工"}
+	        width={500}
         open={userDrawerOpen}
         onClose={() => {
           setUserDrawerOpen(false);
@@ -3281,9 +4686,9 @@ function App() {
               ))}
             </Select>
           </Form.Item>
-          <Form.Item shouldUpdate={(prev, cur) => prev.role !== cur.role} noStyle>
-            {({ getFieldValue }) => {
-              const role = getFieldValue("role");
+	          <Form.Item shouldUpdate={(prev, cur) => prev.role !== cur.role} noStyle>
+	            {({ getFieldValue }) => {
+	              const role = getFieldValue("role");
               const requireCompany = role && role !== "group_admin";
               const companyOptions = isSubAdmin
                 ? companies.filter((company) => company.id === currentUser?.company_id)
@@ -3312,15 +4717,49 @@ function App() {
                       </Option>
                     ))}
                   </Select>
-                </Form.Item>
-              );
-            }}
-          </Form.Item>
-          <Form.Item name="status" label="状态">
-            <Select>
-              <Option value="active">启用</Option>
-              <Option value="inactive">停用</Option>
-            </Select>
+	                </Form.Item>
+	              );
+	            }}
+	          </Form.Item>
+	          <Form.Item
+	            shouldUpdate={(prev, cur) => prev.role !== cur.role || prev.company_id !== cur.company_id}
+	            noStyle
+	          >
+	            {({ getFieldValue }) => {
+	              const selectedRole = getFieldValue("role");
+	              const selectedCompanyId = getFieldValue("company_id");
+	              const targetCompanyId = resolveTargetUserCompanyId(selectedRole, selectedCompanyId);
+	              const roleScopeOptions = getRoleOptionsByCompany(targetCompanyId);
+	              const positionScopeOptions = getPositionOptionsByCompany(targetCompanyId);
+	              return (
+	                <>
+	                  <Form.Item name="org_role_ids" label="组织角色">
+	                    <Select
+	                      mode="multiple"
+	                      allowClear
+	                      placeholder="可选，支持多选"
+	                      optionFilterProp="label"
+	                      options={roleScopeOptions}
+	                    />
+	                  </Form.Item>
+	                  <Form.Item name="org_position_ids" label="岗位">
+	                    <Select
+	                      mode="multiple"
+	                      allowClear
+	                      placeholder="可选，支持多选"
+	                      optionFilterProp="label"
+	                      options={positionScopeOptions}
+	                    />
+	                  </Form.Item>
+	                </>
+	              );
+	            }}
+	          </Form.Item>
+	          <Form.Item name="status" label="状态">
+	            <Select>
+	              <Option value="active">启用</Option>
+	              <Option value="inactive">停用</Option>
+	            </Select>
           </Form.Item>
         </Form>
       </Drawer>
@@ -3337,12 +4776,22 @@ function App() {
         {userDetail ? (
           <Descriptions bordered size="small" column={1}>
             <Descriptions.Item label="姓名">{userDetail.name}</Descriptions.Item>
-            <Descriptions.Item label="角色">
-              {USER_ROLE_LABELS[userDetail.role] || userDetail.role}
-            </Descriptions.Item>
-            <Descriptions.Item label="所属公司">
-              {userDetail.company_id ? companyMap.get(userDetail.company_id) || `#${userDetail.company_id}` : GROUP_LABEL}
-            </Descriptions.Item>
+	            <Descriptions.Item label="角色">
+	              {USER_ROLE_LABELS[userDetail.role] || userDetail.role}
+	            </Descriptions.Item>
+	            <Descriptions.Item label="组织角色">
+	              {userDetail.org_role_names && userDetail.org_role_names.length
+	                ? userDetail.org_role_names.join("，")
+	                : "-"}
+	            </Descriptions.Item>
+	            <Descriptions.Item label="岗位">
+	              {userDetail.org_position_names && userDetail.org_position_names.length
+	                ? userDetail.org_position_names.join("，")
+	                : "-"}
+	            </Descriptions.Item>
+	            <Descriptions.Item label="所属公司">
+	              {userDetail.company_id ? companyMap.get(userDetail.company_id) || `#${userDetail.company_id}` : GROUP_LABEL}
+	            </Descriptions.Item>
             <Descriptions.Item label="邮箱">{userDetail.email || "-"}</Descriptions.Item>
             <Descriptions.Item label="状态">
               {userDetail.status ? USER_STATUS_LABELS[userDetail.status] || userDetail.status : "-"}

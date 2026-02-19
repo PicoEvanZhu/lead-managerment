@@ -105,6 +105,69 @@ Use the admin credentials to log in and obtain a user id:
 - `PUT /opportunities/:id/tags`
 - `GET /tags`
 - `POST /tags`
+- `GET /approval/form-templates`
+- `POST /approval/form-templates`
+- `PATCH /approval/form-templates/:id`
+- `GET /approval/process-templates`
+- `POST /approval/process-templates/validate`
+- `POST /approval/process-templates`
+- `PATCH /approval/process-templates/:id`
+- `GET /approval/instances`
+- `POST /approval/instances`
+- `GET /approval/instances/:id`
+- `POST /approval/instances/:id/actions`
+
+## Approval Workflow Config
+- Form template `schema` is an array of field definitions:
+```json
+[
+  { "key": "amount", "label": "申请金额", "type": "number", "required": true },
+  { "key": "reason", "label": "申请原因", "type": "textarea", "required": true },
+  { "key": "category", "label": "类型", "type": "select", "options": ["A", "B"] }
+]
+```
+- Process template `steps` is an array of approval nodes:
+```json
+[
+  { "step_type": "approval", "name": "直属负责人审批", "approver_type": "manager", "approval_mode": "any" },
+  {
+    "step_type": "approval",
+    "name": "财务审批",
+    "approver_type": "role",
+    "approver_roles": ["subsidiary_admin"],
+    "approval_mode": "any",
+    "condition": {
+      "logic": "and",
+      "rules": [{ "field": "amount", "operator": "gte", "value": 10000 }]
+    }
+  },
+  { "step_type": "cc", "name": "抄送发起人", "approver_type": "user", "approver_user_ids": [1] }
+]
+```
+- Process template also supports `definition` (graph mode) for visual designer:
+```json
+{
+  "version": "graph_v1",
+  "start_node_id": "start",
+  "nodes": [
+    { "id": "start", "name": "开始", "node_type": "start" },
+    { "id": "n1", "name": "部门审批", "node_type": "approval", "approver_type": "manager" },
+    { "id": "n2", "name": "结束", "node_type": "end" }
+  ],
+  "edges": [
+    { "id": "e1", "source": "start", "target": "n1", "priority": 1 },
+    { "id": "e2", "source": "n1", "target": "n2", "priority": 1, "is_default": true }
+  ]
+}
+```
+- Process template lifecycle uses `status`:
+  - `inactive` = 草稿（可编辑，不可发起）
+  - `active` = 已发布（可发起）
+- 发布时会执行流程校验（可达性、死路、循环、条件节点默认分支）。
+- Supported field types: `text`, `textarea`, `number`, `date`, `select`, `boolean`.
+- Supported approver types: `user`, `role`, `manager`.
+- Supported step types: `approval`, `cc`.
+- Supported condition operators: `eq`, `neq`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`, `contains`, `is_true`, `is_false`, `is_empty`, `not_empty`.
 
 ## Example Requests
 ```bash
